@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HIỂN THỊ DS KHÁCH HÀNG</title>
+</head>
+<body>
+<a href="/create/city"> Thêm Mới Thành Phố</a>
+</br>
+<h1> City List</h1>
+<table style="color: red" border="1">
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Nation</th>
+        <th>Area</th>
+        <th>Population</th>
+        <th>GDP</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="city,loop : ${listCity}">
+        <tr>
+            <td th:text="${loop.count}"></td>
+            <td th:text="${city.name}"></td>
+            <td><a th:href="@{/detail/city/{id}(id=${city.getId()})}"><span th:if="${city.nation}" th:text="${city.nation.name}"></span></a></td>
+            <td th:text="${city.area}"></td>
+            <td th:text="${city.population}"></td>
+            <td th:text="${city.GDP}"></td>
+            <td th:text="${city.description}"></td>
+            <!--            <td><a th:href="@{/edit/customer/__${customer.id}__ }">Edit</a></td>-->
+            <td><a th:href="@{/edit/city/{id}(id=${city.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/city/{id}(id=${city.getId()})}">Delete</a></td>
+<!--            <td><a th:href="@{/detail/customer/{id}(id=${customer.getId()})}">Detail</a></td>-->
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

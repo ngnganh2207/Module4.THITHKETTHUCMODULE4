@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit customer</title>
+</head>
+<body>
+<h1>Edit customer</h1>
+<p>
+    <a href="/">Quay lại trang danh sách city</a>
+</p>
+
+<th:block  th:if="${message}">
+    <p style="color: blueviolet" th:text="${message}"></p>
+</th:block>
+
+<form th:action="@{/edit/city/}" th:object="${city}" method="post">
+        <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name City:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:error="*{name}">Name City Not Null, Từ 2->10 Ký Tự</span><br/>
+        </tr>
+        <tr>
+            <td>Nation:</td><br/>
+            <!--            Chưa hiểu đoạn này-->
+           <td>
+            <select name="nation">
+                <option th:each="n : ${nations}"
+                        th:value="${n.id}"
+                        th:text="${n.name}"
+                        th:selected="(${city.nation}) and (${n.id} == *{nation.id})">
+                </option>
+            </select>
+           </td>
+        </tr>
+        <tr>
+            <td>Area:</td>
+            <td><input type="text" th:field="*{area}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('area')}" th:error="*{name}">Area Phải not null và là số dương >1</span><br/>
+        </tr>
+        <tr>
+            <td>Population:</td>
+            <td><input type="text" th:field="*{population}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('population')}" th:error="*{population}">Notnull, Population Phải là Số dương</span><br/>
+        </tr>
+        <tr>
+            <td>GDP:</td>
+            <td><input type="text" th:field="*{GDP}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('GDP')}" th:error="*{GDP}">GDP Phải là Số dương, not null</span><br/>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Chỉnh sửa City"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

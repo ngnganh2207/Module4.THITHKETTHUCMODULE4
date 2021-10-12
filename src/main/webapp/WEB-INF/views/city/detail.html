@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Xem Thông Tin Chi Tiết</h1>
+<p>
+    <a href="/">Quay Lại Xem Danh Sách Thành Phố</a>
+</p>
+<table style="color: red" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Nation</th>
+        <th>Area</th>
+        <th>Population</th>
+        <th>GDP</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:object="${city}">
+        <tr>
+            <td th:text="${city.id}"></td>
+            <td th:text="${city.name}"></td>
+            <td th:if="${city.nation}" th:text="${city.nation.name}"></td>
+            <td th:text="${city.area}"></td>
+            <td th:text="${city.population}"></td>
+            <td th:text="${city.GDP}"></td>
+            <td th:text="${city.description}"></td>
+            <td><a th:href="@{/edit/city/{id}(id=${city.id})}">Edit</a></td>
+            <td><a th:href="@{/delete/city/{id}(id=${city.getId()})}">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

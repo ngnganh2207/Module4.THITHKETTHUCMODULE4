@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete City</title>
+</head>
+<body>
+<h1>Delete City</h1>
+<h2>Are you sure?</h2>
+<p>
+    <a href="/">Back To List City</a>
+</p>
+<form th:action="@{/delete/city/}" th:object="${city}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name City:</td>
+            <td th:text="${city.name}"></td>
+        </tr>
+        <tr>
+            <td>Nation</td>
+            <td th:if="${city.nation}" th:text="${city.nation.name}"></td>
+        </tr>
+        <tr>
+            <td>Area:</td>
+            <td><input type="text" th:field="*{area}"/></td>
+<!--            <span style="color: red" th:if="${#fields.hasErrors('area')}" th:error="*{name}">Area Phải số dương >1</span><br/>-->
+        </tr>
+        <tr>
+            <td>Population:</td>
+            <td><input type="text" th:field="*{population}"/></td>
+<!--            <span style="color: red" th:if="${#fields.hasErrors('population')}" th:error="*{population}">Notnull, Population Phải là Số dương</span><br/>-->
+        </tr>
+        <tr>
+            <td>GDP:</td>
+            <td><input type="text" th:field="*{GDP}"/></td>
+<!--            <span style="color: red" th:if="${#fields.hasErrors('GDP')}" th:error="*{GDP}">GDP Phải là Số dương, not null</span><br/>-->
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+            <!--            <span style="color: red" th:if="${#fields.hasErrors('description')}" th:error="*{description}"> not null</span><br/>-->
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Delete City"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

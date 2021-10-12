@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Mới City</title>
+</head>
+<body>
+<h1>Create City</h1>
+<p>
+    <a href="/">
+        Quay Lại Trang Chủ Danh Sách City
+    </a>
+</p>
+<th:block th:if="${message}">
+    <p style="color: red" th:text="${message}"></p>
+</th:block>
+<form th:action="@{/create/city}" th:object="${city}" method="post">
+    <table>
+        <tr>
+            <td>Name City:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('name')}" th:error="*{name}">Name City Not Null, Từ 2->10 Ký Tự</span><br/>
+        </tr>
+        <td>Nation:</td>
+        <td>
+            <select th:field="*{nation}">
+                <option th:each="n : ${nations}" th:value="${n.id}" th:text="${n.name}"></option>
+                <span style="color: red" th:if="${#fields.hasErrors('nation')}" th:error="*{name}">Nation Not Null</span><br/>
+            </select>
+        </td>
+        <tr>
+            <td>Area:</td>
+            <td><input type="text" th:field="*{area}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('area')}" th:error="*{name}">Area Phải số dương >1</span><br/>
+        </tr>
+        <tr>
+            <td>Population:</td>
+            <td><input type="text" th:field="*{population}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('population')}" th:error="*{population}">Notnull, Population Phải là Số dương</span><br/>
+        </tr>
+        <tr>
+            <td>GDP:</td>
+            <td><input type="text" th:field="*{GDP}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('GDP')}" th:error="*{GDP}">GDP Phải là Số dương, not null</span><br/>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}"/></td>
+            <span style="color: red" th:if="${#fields.hasErrors('description')}" th:error="*{description}"> not null</span><br/>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Nhập/Thêm mới thành phố"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
